@@ -1,1 +1,5 @@
 # Principal_Component_Analysis
+
+学校の課題用リポジトリ
+
+あらかじめ用意されたデータにをPrincipal_Component_Analysis実施し、データに対し次元削減を行う。
