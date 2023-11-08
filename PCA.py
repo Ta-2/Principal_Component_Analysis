@@ -1,4 +1,5 @@
 import numpy as np
+import illustrator as ill
 
 #データの取得
 X = np.loadtxt('data.csv')
@@ -64,3 +65,5 @@ print(new_basis)
 new_data = np.dot(X, new_basis.T)
 print("new_basis:")
 print(new_data)
+
+ill.illustrate(new_data)
