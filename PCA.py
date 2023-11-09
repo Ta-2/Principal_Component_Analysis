@@ -21,27 +21,6 @@ print(Xbar)
 Cov = np.dot(Xbar.T, Xbar)/row
 print("Cov matrix:")
 print(Cov)
-"""
-#Covの固有値と固有ベクトルを取得
-eig_val,  eig_vec = np.linalg.eig(Cov)
-eig_vec = eig_vec.T
-#固有値が全て正の値になるように調節
-for idx, (val, vec) in enumerate(zip(eig_val, eig_vec)):
-    if val < 0.0:
-        eig_val[idx] *= -1
-        eig_vec[idx] *= -1
-
-print("eigen value:")
-print(eig_val)
-print("eigen vector:")
-print(eig_vec)
-
-#固有値の値が降順になるようにインデックスをソート
-sorted_index = sorted(enumerate(eig_val), key=lambda x: x[1], reverse=True)
-index = [pair[0] for pair in sorted_index]
-print("index:")
-print(index)
-"""
 eig_val, eig_vec = em.calc_sorter_eigen(Cov)
 
 print("eigen value:")
@@ -51,7 +30,6 @@ print(eig_vec)
 
 #寄与率を計算
 eig_val_sum = np.sum(eig_val)
-#Proportion_of_Variance = [eig_val[idx]/eig_val_sum for idx in index]
 Proportion_of_Variance = eig_val/eig_val_sum
 #累積寄与率を計算
 Cumulative_Proportion = []
