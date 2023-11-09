@@ -1,5 +1,6 @@
 import numpy as np
 import illustrator as ill
+import eigen_module as em
 
 #データの取得
 X = np.loadtxt('data.csv')
@@ -20,7 +21,7 @@ print(Xbar)
 Cov = np.dot(Xbar.T, Xbar)/row
 print("Cov matrix:")
 print(Cov)
-
+"""
 #Covの固有値と固有ベクトルを取得
 eig_val,  eig_vec = np.linalg.eig(Cov)
 eig_vec = eig_vec.T
@@ -40,10 +41,18 @@ sorted_index = sorted(enumerate(eig_val), key=lambda x: x[1], reverse=True)
 index = [pair[0] for pair in sorted_index]
 print("index:")
 print(index)
+"""
+eig_val, eig_vec = em.calc_sorter_eigen(Cov)
+
+print("eigen value:")
+print(eig_val)
+print("eigen vector:")
+print(eig_vec)
 
 #寄与率を計算
 eig_val_sum = np.sum(eig_val)
-Proportion_of_Variance = [eig_val[idx]/eig_val_sum for idx in index]
+#Proportion_of_Variance = [eig_val[idx]/eig_val_sum for idx in index]
+Proportion_of_Variance = eig_val/eig_val_sum
 #累積寄与率を計算
 Cumulative_Proportion = []
 CPsum = 0.0
@@ -58,7 +67,7 @@ print(Cumulative_Proportion)
 
 #新しい基底での座標を計算する
 basis_num = 2   #用意する基底の数
-new_basis = np.r_[[eig_vec[idx] for idx in index[0:basis_num]]]
+new_basis = eig_vec[0:basis_num]
 print(new_basis)
 
 #新しい基底を用いて次元削減された座標を計算
