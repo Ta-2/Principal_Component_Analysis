@@ -54,3 +54,4 @@ print("new_basis:")
 print(new_data)
 
 ill.illustrate(new_data)
+ill.show()
